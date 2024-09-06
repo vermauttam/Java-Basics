@@ -4,7 +4,8 @@ public class Main
     {
         int myInt = 15;
         double myFloat = (double) myInt;  //double myFloat = (double) myInt is not required in Widening casting 
-        double myFloat = myInt;      // This will also give the same result as above
+        double myFloat2 = myInt;      // This will also give the same result as above
         System.out.println(myFloat);
+        System.out.println(myFloat2);
     }
 }
