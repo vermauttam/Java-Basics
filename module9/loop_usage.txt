@@ -1,0 +1,14 @@
+do-while :-
+# When you want to execute the loop for atleast once (It doesn't matter if the given condition inside the loop is true or not)
+
+
+while :-
+# When you do not know how many times the loop will work
+# Used to read a file
+# Used to read a database
+# Also used in networking
+
+
+for :-
+# When number of iteration are given 
+# When you know how many times you want to execute the loop
