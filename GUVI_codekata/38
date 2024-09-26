@@ -1,1 +1,33 @@
-38
+import java.util.*;
+import java.util.stream.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            list.add(sc.nextInt());
+        }
+        //..... YOUR CODE STARTS HERE .....
+        
+        list.stream()
+            .filter(Main::isPrime)  // Filter for prime numbers
+            .sorted(Comparator.reverseOrder()) // Sort in descending order
+            .forEach(System.out::println); // Print each prime number
+        
+        //..... YOUR CODE ENDS HERE .....
+    }
+
+    public static boolean isPrime(int num) {
+        //..... YOUR CODE STARTS HERE .....
+        
+        if (num <= 1) return false; // 0 and 1 are not prime
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) return false; // Found a divisor
+        }
+        return true; // It's prime
+        
+        //..... YOUR CODE ENDS HERE .....
+    }
+}
