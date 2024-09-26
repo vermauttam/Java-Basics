@@ -1,1 +1,22 @@
-37
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        var n = sc.nextInt();
+        var list = new ArrayList<Integer>();
+        for (var i = 0; i < n; i++) {
+            list.add(sc.nextInt());
+        }
+        //..... YOUR CODE STARTS HERE .....
+        
+        var average = list.stream()
+                          .mapToInt(Integer::intValue)
+                          .average()
+                          .orElse(0.0);
+        
+        System.out.printf("%.1f%n", average);
+        
+        //..... YOUR CODE ENDS HERE .....
+    }
+}
