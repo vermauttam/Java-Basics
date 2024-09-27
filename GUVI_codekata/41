@@ -1,1 +1,41 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        //..... YOUR CODE STARTS HERE .....
+// Create a scanner object to read input
+        var scanner = new Scanner(System.in);
+
+        // Read the number of elements
+        var n = scanner.nextInt();
+
+        // Create a list to store the integers
+        var list = new ArrayList<Integer>();
+
+        // Read n integers and add them to the list
+        for (var i = 0; i < n; i++) {
+            list.add(scanner.nextInt());
+        }
+
+        // Sort the list in descending order
+        Collections.sort(list, Collections.reverseOrder());
+
+        // Find the second largest number
+        var largest = list.get(0);
+        var secondLargest = -1;
+
+        for (var num : list) {
+            if (num < largest) {
+                secondLargest = num;
+                break;
+            }
+        }
+
+        // Output the second largest number
+        System.out.println(secondLargest);
+
+
+        //..... YOUR CODE ENDS HERE .....
+    }
+}
 
