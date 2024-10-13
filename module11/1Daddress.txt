@@ -1,0 +1,7 @@
+A[i] = B + (i-k)*n
+
+A[i] == Address of element whom you want to find
+B == Base address / Starting address of element
+i == index
+k == Start index
+n == Size of 1 element in Bytes
