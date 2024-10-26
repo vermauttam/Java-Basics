@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) { 
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            String input = scanner.nextLine(); 
+            if (input == null || input.isEmpty()) {
+                throw new IllegalArgumentException("Input cannot be null or empty."); 
+            } 
+            String encrypted = encrypt(input); 
+            String decrypted = decrypt(encrypted); 
+            System.out.println("Encrypted String: " + encrypted); 
+            System.out.println("Decrypted String: " + decrypted);
+
+        } catch (IllegalArgumentException e) { 
+            System.out.println("Error: " + e.getMessage()); 
+        } catch (Exception e) { 
+            System.out.println("An unexpected error occurred: " + e.getMessage()); 
+        } finally { 
+            scanner.close(); 
+        } 
+    }
+
+    private static String encrypt(String input) { 
+        StringBuilder encrypted = new StringBuilder(); 
+        for (char ch : input.toCharArray()) { 
+            if (Character.isLetter(ch)) { 
+                char base = Character.isLowerCase(ch) ? 'a' : 'A'; 
+                encrypted.append((char) ((ch - base + 3) % 26 + base)); 
+            } else if (Character.isDigit(ch)) { 
+                encrypted.append((char) ((ch - '0' + 3) % 10 + '0')); 
+            } else {
+                encrypted.append(ch); 
+            } 
+        }
+        return encrypted.reverse().toString(); 
+    }
+
+    private static String decrypt(String encrypted) { 
+        StringBuilder reversed = new StringBuilder(encrypted).reverse();
+        StringBuilder decrypted = new StringBuilder(); 
+        for (char ch : reversed.toString().toCharArray()) { 
+            if (Character.isLetter(ch)) { 
+                char base = Character.isLowerCase(ch) ? 'a' : 'A'; 
+                decrypted.append((char) ((ch - base - 3 + 26) % 26 + base)); 
+            } else if (Character.isDigit(ch)) { 
+                decrypted.append((char) ((ch - '0' - 3 + 10) % 10 + '0')); 
+            } else { 
+                decrypted.append(ch); 
+            } 
+        }
+        return decrypted.toString(); 
+    } 
+}
