@@ -1,0 +1,161 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+
+        if (choice == 1) {
+            CustomLinkedList linkedList = new CustomLinkedList();
+            for (int i = 0; i < 3; i++) {
+                linkedList.add(scanner.nextInt());
+            }
+            scanner.nextLine();
+            System.out.println("Linked List after additions:");
+            linkedList.display();
+            int removeIndex = scanner.nextInt();
+            linkedList.remove(removeIndex);
+            System.out.println("Linked List after removal:");
+            linkedList.display();
+            int getIndex = scanner.nextInt();
+            System.out.println("Element at index " + getIndex + ": " + linkedList.get(getIndex));
+            System.out.println("Size of the LinkedList: " + linkedList.size());
+        } else if (choice == 2) {
+            CustomStack stack = new CustomStack();
+            for (int i = 0; i < 3; i++) {
+                stack.push(scanner.nextInt());
+            }
+            System.out.println("Stack after pushes:");
+            stack.display();
+            System.out.print("Popped elements: ");
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 3; i++) {
+                try {
+                    sb.append(stack.pop()).append(" ");
+                } catch (IllegalStateException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            System.out.println(sb.toString().trim());
+            System.out.println("Stack after pops:");
+            stack.display();
+        } else {
+            System.out.println("Invalid choice.");
+        }
+        scanner.close();
+    }
+
+    static class CustomLinkedList {
+        private Node head;
+        private int size;
+
+        private class Node {
+            int data;
+            Node next;
+            Node(int data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+
+        public CustomLinkedList() {
+            head = null;
+            size = 0;
+        }
+
+        public void add(int data) {
+            Node newNode = new Node(data);
+            if (head == null) {
+                head = newNode;
+            } else {
+                Node current = head;
+                while (current.next != null) {
+                    current = current.next;
+                }
+                current.next = newNode;
+            }
+            size++;
+        }
+
+        public void remove(int index) {
+            if (index < 0 || index >= size) {
+                System.out.println("Index out of bounds.");
+                return;
+            }
+            if (index == 0) {
+                head = head.next;
+            } else {
+                Node current = head;
+                for (int i = 0; i < index - 1; i++) {
+                    current = current.next;
+                }
+                current.next = current.next.next;
+            }
+            size--;
+        }
+
+        public int get(int index) {
+            if (index < 0 || index >= size) {
+                throw new IndexOutOfBoundsException("Index out of bounds.");
+            }
+            Node current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+            return current.data;
+        }
+
+        public int size() {
+            return size;
+        }
+
+        public void display() {
+            Node current = head;
+            StringBuilder sb = new StringBuilder();
+            while (current != null) {
+                sb.append(current.data);
+                current = current.next;
+                if (current != null) {
+                    sb.append(" ");
+                }
+            }
+            System.out.println(sb.toString());
+        }
+    }
+
+    static class CustomStack {
+        private CustomLinkedList list;
+
+        public CustomStack() {
+            list = new CustomLinkedList();
+        }
+
+        public void push(int data) {
+            list.add(data);
+        }
+
+        public int pop() {
+            if (list.size() == 0) {
+                throw new IllegalStateException("Stack underflow.");
+            }
+            int data = list.get(list.size() - 1);
+            list.remove(list.size() - 1);
+            return data;
+        }
+
+        public int peek() {
+            if (list.size() == 0) {
+                throw new IllegalStateException("Stack is empty.");
+            }
+            return list.get(list.size() - 1);
+        }
+
+        public int size() {
+            return list.size();
+        }
+
+        public void display() {
+            list.display();
+        }
+    }
+}
